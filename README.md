@@ -1,4 +1,4 @@
-# HomeLab
+# Home Lab
 
 This README documents the start of a Home Lab to learn more and implement concepts about virtualization, Active Directory, and Networking.
 
@@ -37,5 +37,47 @@ After booting, you will see the Server Manager pop-up:
 ![image](https://github.com/SaminSahim/HomeLab/assets/85653393/c1a1463a-93aa-4fb2-8232-24a5491c160e)
 
 Before moving on, we will make a few changes to the Domain Controller. Go into your network settings and find the two network adapters that we configured at the beginning. 
-Find the one that is connected to your home network and change it's name to something that you will remember. Make sure to not fiddle with any network settings on this adapter. Go into the second adapter and click Properties. Here you will make the following changes to the Internet Protocol Version 4 (TCP/IPv4) Properties:
+Find the one that is connected to your home network and change its name to something that you will remember. Make sure to not fiddle with any network settings on this adapter. Go into the second adapter and click Properties. Here you will make the following changes to the Internet Protocol Version 4 (TCP/IPv4) Properties:
+
 ![image](https://github.com/SaminSahim/HomeLab/assets/85653393/a69e26ba-6140-4419-9d93-3049a75f6e24)
+
+## Server Manager
+
+From here we can finally start setting up our server to host Active Directory, NAS, and DHCP.
+
+We are going to click Add Roles and Features. We are going to click next through the installation until we get to the server roles tabs. Here, we will select Active Directory Domain Services, DHCP Server, and Remote Access:
+
+![image](https://github.com/user-attachments/assets/2281c576-f65a-48eb-8c9e-7e8c0d07a78c)
+
+After these selections, keep going next in the installation until you get to the Role Services for Remote Access. Here, click on Routing and it will also enable DirectAccess and VPN (RAS). Then go through the rest of the installation till you get to confirmation of where you can install the servers we have chosen.
+
+After this process, we still have to promote our device as the domain controller. Click on the flag in the top right and click "Promote this server to a domain controller." 
+
+## Active Directory Domain Services Configuration 
+
+After clicking the previous button, the following configuration Wizard should have popped up:
+
+![image](https://github.com/user-attachments/assets/b1e9839f-6e31-4873-800c-483d90ebc108)
+
+Here we click "Add a new forest" since we don't have any existing domains. Feel free to name the domain whatever you want. In the following tab, set the DSRM password as you please. In DNS options, uncheck the "Create DNS Delegation" box. We will also use the NetBIOS domain name provided to us. From here, keep clicking next till you have installed the Active Directory Service. After Installation, the device will reboot and you will see that the account is now called EXAMPLEDOMAIN\Administrator.
+
+## RAS and NAT Configuration
+
+We need our clients to be able to communicate with the outside internet. For that, we need NAT (Network Address Translation). We can configure our NAT through RAS (Routing and Remote Access). RAS provides secure remote access to private networks within the domain. 
+
+To configure our NAT, click Tools in the Server Manager. From the options given, click Routing and Remote Access. The following window will appear:
+
+![image](https://github.com/user-attachments/assets/99bd982f-4734-4240-a6ed-ed65addb296e)
+
+From here, you will right-click the local domain controller and click Configure Routing and Remote Access. Then click on the NAT configuration. Click next till you can finish the installation. It will look something like this:
+
+![image](https://github.com/user-attachments/assets/546ef4fc-f676-4dfd-8bcf-f76d52863a85)
+
+## DHCP Setup
+
+
+
+
+
+
+
